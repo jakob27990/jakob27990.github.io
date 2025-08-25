@@ -10,7 +10,7 @@
 <body>
 
 <!-- Desktop Navbar -->
-<nav class="desktop-nav">
+<nav class="desktop-only">
   <div class="nav-left">
     <a href="index.html">🏠 Home</a>
   </div>
@@ -24,54 +24,52 @@
   <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 
-<!-- Mobile Navbar -->
-<nav class="mobile-nav">
-  <div class="mobile-nav-inner">
+<!-- Mobile Navbar + Collapsible Profile -->
+<div class="mobile-only" id="mobileProfile">
+  <div class="mobile-nav">
     <a href="index.html">🏠 Home</a>
-    <button id="mobileThemeToggle">🌙</button>
+    <button class="theme-toggle" id="mobileThemeToggle">🌙</button>
   </div>
-</nav>
-
-<!-- Mobile Profile -->
-<div id="mobileProfile" class="collapsed">
-  <div class="profile-top">
-    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo mobile-photo" id="mobilePhoto">
-    <div class="mobile-name-expand">
-      <h1>Jakob Degazio</h1>
-      <button class="expand-btn" id="expandBtn">Expand ▼</button>
-    </div>
-  </div>
-  <div class="profile-expanded">
-    <p>IT Professional • System Administration & Endpoint Management</p>
+  <div class="mobile-header">
+    <h1 id="mobileName">Jakob Degazio</h1>
+    <button id="expandBtn">Collapse ▲</button>
+    <img src="jakob.jpg" alt="Jakob Degazio" class="mobile-photo">
     <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
     <a class="link-chip" href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank">🔗 LinkedIn</a>
     <div class="contact-info">
-      <p>Email: jake.degazio@gmail.com</p>
-      <p>Phone: 289-668-4711</p>
+      📞 289-668-4711<br>
+      ✉️ <a href="mailto:jake.degazio@gmail.com">jake.degazio@gmail.com</a>
     </div>
   </div>
 </div>
 
-<!-- Desktop Layout -->
+<!-- Back to Top and Print buttons -->
+<button id="backToTop">⬆️</button>
+<button id="printBtn">🖨️</button>
+
 <div class="resume-layout">
-  <aside class="sidebar">
+  <!-- Sidebar -->
+  <aside class="sidebar desktop-only">
     <h1>Jakob Degazio</h1>
     <div class="title">IT Professional<br>System Administration & Endpoint Management</div>
-    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo desktop-photo" id="desktopPhoto">
+    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo" loading="lazy">
     <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
     <a class="link-chip" href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank">🔗 LinkedIn</a>
     <div class="contact-info">
-      <p>Email: jake.degazio@gmail.com</p>
-      <p>Phone: 289-668-4711</p>
+      📞 289-668-4711<br>
+      ✉️ <a href="mailto:jake.degazio@gmail.com">jake.degazio@gmail.com</a>
     </div>
   </aside>
 
+  <!-- Main Content -->
   <main>
-    <section id="summary"><h2>Summary</h2>
+    <section id="summary">
+      <h2>Summary</h2>
       <p>Detail-oriented and proactive IT professional with strong problem-solving and communication skills. Experienced in education environments, managing complex systems, and supporting both technical teams and end users. Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.</p>
     </section>
 
-    <section id="experience"><h2>Experience</h2>
+    <section id="experience">
+      <h2>Experience</h2>
       <h3>Information Technology Services (Various Positions) — Niagara College</h3>
       <p><em>2018 — Present · Welland, ON</em></p>
       <ul>
@@ -88,22 +86,24 @@
       </ul>
     </section>
 
-    <section id="skills"><h2>Skills & Strengths</h2>
+    <section id="skills">
+      <h2>Skills & Strengths</h2>
       <div class="pill-container">
-        <span class="pill">💻 PowerShell</span>
-        <span class="pill">🖥 SCCM / Intune</span>
-        <span class="pill">👥 Active Directory</span>
-        <span class="pill">🛠 Group Policy</span>
-        <span class="pill">☁️ Azure AD</span>
-        <span class="pill">🔧 Patch Management</span>
-        <span class="pill">🌐 Networking</span>
-        <span class="pill">🪟 Windows Server</span>
-        <span class="pill">📄 Documentation</span>
-        <span class="pill">💬 Technical Support</span>
+        <span class="pill">PowerShell</span>
+        <span class="pill">SCCM / Intune</span>
+        <span class="pill">Active Directory</span>
+        <span class="pill">Group Policy</span>
+        <span class="pill">Azure AD</span>
+        <span class="pill">Patch Management</span>
+        <span class="pill">Networking</span>
+        <span class="pill">Windows Server</span>
+        <span class="pill">Documentation</span>
+        <span class="pill">Technical Support</span>
       </div>
     </section>
 
-    <section id="education"><h2>Education & Certifications</h2>
+    <section id="education">
+      <h2>Education & Certifications</h2>
       <p>Diploma, Network and Cloud Technologies (Computer Systems Technician) — Niagara College</p>
       <ul>
         <li>ITIL V4 Foundation</li>
@@ -114,25 +114,16 @@
       </ul>
     </section>
 
-    <section id="hobbies"><h2>Hobbies & Interests</h2>
+    <section id="hobbies">
+      <h2>Hobbies & Interests</h2>
       <div class="pill-container">
-        <span class="pill">✈️ General Aviation Flying</span>
-        <span class="pill">🖨 3D Printing</span>
-        <span class="pill">🏍 Motorcycles</span>
-        <span class="pill">🎸 Guitar</span>
+        <span class="pill">General Aviation Flying</span>
+        <span class="pill">3D Printing</span>
+        <span class="pill">Motorcycles</span>
+        <span class="pill">Guitar</span>
       </div>
     </section>
   </main>
-</div>
-
-<!-- Floating Buttons -->
-<button class="back-to-top" id="backToTop">↑</button>
-<button class="print-btn" id="printBtn">🖨</button>
-
-<!-- Modal for Desktop Photo Zoom -->
-<div id="photoModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="modalImg">
 </div>
 
 <script src="script.js"></script>
