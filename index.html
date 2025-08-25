@@ -24,26 +24,20 @@
   }
 
   *{box-sizing:border-box}
-  html,body{height:100%}
   body{
     margin:0;
     font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
     background:var(--bg);
     color:var(--text);
-    line-height:1.45;
     transition:background .35s,color .35s;
+    line-height:1.45;
   }
 
   /* NAV */
   nav{
-    position:fixed;
-    left:0;right:0;top:0;
-    height:64px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-    z-index:40;
+    position:fixed;top:0;left:0;right:0;height:64px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 20px;z-index:40;
     background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
     backdrop-filter: blur(6px);
     border-bottom:1px solid rgba(15,23,42,0.04);
@@ -52,157 +46,70 @@
     background:linear-gradient(180deg, rgba(10,12,15,0.6), rgba(10,12,15,0.2));
     border-bottom:1px solid rgba(255,255,255,0.04);
   }
+  .nav-left{display:flex;gap:18px;}
+  .nav-left a{color:var(--text);text-decoration:none;font-weight:600;font-size:0.95rem;opacity:.95;}
+  .nav-left a:hover{color:var(--accent);}
+  .theme-toggle{background:none;border:0;cursor:pointer;font-size:1.05rem;color:var(--text);padding:8px;}
 
-  .nav-left { display:flex; gap:18px; align-items:center; }
-  .nav-left a{ color:var(--text); text-decoration:none; font-weight:600; font-size:0.95rem; opacity:.95; }
-  .nav-left a:hover{ color:var(--accent); }
-
-  .nav-right { display:flex; gap:12px; align-items:center; }
-
-  .theme-toggle{
-    background:transparent;
-    border:0;
-    cursor:pointer;
-    font-size:1.05rem;
-    color:var(--text);
-    padding:8px;
-    border-radius:8px;
-  }
-
-  /* HERO with slow zoom + gradient fallback + optional image */
+  /* HERO */
   .hero {
-    position:relative;
-    min-height:78vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:120px 20px 60px; /* leave space for fixed nav */
-    text-align:center;
-    overflow:hidden;
+    position:relative;min-height:78vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:120px 20px 60px;text-align:center;overflow:hidden;
   }
-
   .hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:-2;
-    /* background.jpg → optional background image file */
-    background:
-      linear-gradient(135deg, rgba(14,165,255,0.85), rgba(0,102,204,0.85)),
-      url('background.jpg') center/cover no-repeat;
+    content:"";position:absolute;inset:0;z-index:-2;
+    background:linear-gradient(135deg, rgba(14,165,255,0.85), rgba(0,102,204,0.85)),
+      url('background.jpg') center/cover no-repeat; /* background.jpg → optional file */
     background-blend-mode:overlay;
     filter:brightness(.55) blur(2px);
-    transform:scale(1);
     animation: zoom 20s ease-in-out infinite alternate;
   }
-  @keyframes zoom {
-    from{ transform: scale(1) }
-    to  { transform: scale(1.08) }
-  }
+  @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
   .hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:-1;
-    background: radial-gradient(60% 40% at 50% 40%, rgba(0,0,0,0.08), rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.6) 100%);
-    opacity:.18;
-    pointer-events:none;
+    content:"";position:absolute;inset:0;z-index:-1;
+    background: radial-gradient(60% 40% at 50% 40%, rgba(0,0,0,0.1), rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.6) 100%);
+    opacity:.2;
   }
+  .hero-inner{max-width:880px;color:white;display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .hero h1{font-size:2.6rem;margin:0;text-shadow:0 6px 18px rgba(0,0,0,0.35);}
+  .hero .title{font-size:1.05rem;font-weight:600;color:rgba(255,255,255,0.95);}
 
-  .hero-inner{
-    max-width:880px;
-    width:100%;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
-  }
-
-  .hero h1{
-    font-size:2.6rem;
-    margin:0;
-    letter-spacing:-0.02em;
-    text-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  }
-  .hero .title {
-    font-size:1.05rem;
-    font-weight:600;
-    color:rgba(255,255,255,0.95);
-    margin-top:4px;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  }
-
+  /* Button fix */
   .download-btn{
     margin-top:16px;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:rgba(255,255,255,0.95);
-    color:var(--text);
-    padding:10px 18px;
-    border-radius:999px;
-    font-weight:700;
-    text-decoration:none;
-    box-shadow: 0 8px 30px rgba(2,6,23,0.12);
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .download-btn:hover{ transform:translateY(-4px); box-shadow: 0 18px 50px rgba(2,6,23,0.18) }
-
-  /* jakob.jpg → profile photo file */
-  .profile-photo{
-    width:200px; /* Increased size */
-    height:200px;
-    border-radius:50%;
-    object-fit:cover;
-    margin-top:18px;
-    border:4px solid rgba(255,255,255,0.9);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
-    transition: transform .25s ease;
-  }
-  .profile-photo:hover{ transform:translateY(-6px) scale(1.02) }
-
-  /* Content sections */
-  main{ padding:30px 20px 80px; max-width:980px; margin:0 auto; }
-
-  section.card{
-    background:var(--card);
-    border-radius:12px;
-    padding:26px;
-    margin:28px 0;
-    box-shadow: 0 8px 30px rgba(2,6,23,0.06);
-    opacity:0;
-    transform:translateY(18px);
-    transition: all .6s cubic-bezier(.2,.9,.3,1);
-  }
-  section.card.show{
-    opacity:1;
-    transform:none;
-  }
-
-  h2{ color:var(--accent); margin:0 0 12px 0; }
-  p.lead{ color:var(--muted); margin:0 0 12px 0; font-size:1rem }
-
-  ul{ padding-left:18px; margin:8px 0 0 0 }
-  li{ margin:8px 0; color:var(--text) }
-
-  .skill-pill{
-    display:inline-block;
+    display:inline-flex;align-items:center;gap:8px;
     background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    color:white;
-    padding:6px 12px;
-    border-radius:999px;
-    margin:6px 6px 0 0;
-    font-weight:600;
-    font-size:0.9rem;
+    color:white !important;
+    padding:10px 20px;border-radius:999px;font-weight:700;text-decoration:none;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .download-btn:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.45)}
+
+  /* jakob.jpg → profile photo */
+  .profile-photo{
+    width:220px;height:220px;
+    border-radius:50%;object-fit:cover;margin-top:20px;
+    border:4px solid rgba(255,255,255,0.95);
+    box-shadow:0 0 25px rgba(14,165,255,0.65); /* glowing effect */
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .profile-photo:hover{
+    transform:translateY(-6px) scale(1.03);
+    box-shadow:0 0 35px rgba(14,165,255,0.9);
   }
 
-  @media (max-width:720px){
-    .hero h1{ font-size:2rem }
-    .profile-photo{ width:160px; height:160px }
-    nav{ padding:0 12px }
-    .nav-left a{ font-size:0.9rem }
-  }
+  /* Sections */
+  main{padding:30px 20px 80px;max-width:980px;margin:0 auto;}
+  section.card{background:var(--card);border-radius:12px;padding:26px;margin:28px 0;
+    box-shadow:0 8px 30px rgba(2,6,23,0.06);
+    opacity:0;transform:translateY(18px);
+    transition: all .6s cubic-bezier(.2,.9,.3,1);}
+  section.card.show{opacity:1;transform:none;}
+  h2{color:var(--accent);margin:0 0 12px;}
+  .skill-pill{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white;padding:6px 12px;border-radius:999px;margin:6px 6px 0 0;font-weight:600;font-size:0.9rem;}
 </style>
 </head>
 <body>
@@ -215,9 +122,7 @@
     <a href="#skills">Skills</a>
     <a href="#education">Education</a>
   </div>
-  <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle">🌙</button>
-  </div>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 
 <!-- HERO -->
@@ -227,12 +132,10 @@
     <div class="title">IT Professional | System Administration &amp; Endpoint Management</div>
 
     <!-- JakobDegazioResume.pdf → resume file -->
-    <a class="download-btn" href="JakobDegazioResume.pdf" download>
-      📄 Download Resume
-    </a>
+    <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
 
-    <!-- jakob.jpg → profile photo file -->
-    <img alt="Jakob Degazio" src="jakob.jpg" class="profile-photo"
+    <!-- jakob.jpg → profile photo -->
+    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo"
          onerror="this.style.display='none'">
   </div>
 </header>
@@ -240,21 +143,24 @@
 <main>
   <section id="summary" class="card">
     <h2>Summary</h2>
-    <p class="lead">Detail-oriented and proactive IT professional with strong problem-solving and communication skills. Experienced in education environments, managing complex systems, and supporting both technical teams and end users. Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.</p>
+    <p>Detail-oriented and proactive IT professional with strong problem-solving and communication skills. Experienced in education environments, managing complex systems, and supporting both technical teams and end users. Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.</p>
   </section>
 
   <section id="experience" class="card">
     <h2>Experience</h2>
     <h3>Information Technology Services (Various Positions) — Niagara College</h3>
-    <p class="lead"><em>2018 — Present · Welland, ON</em></p>
+    <p><em>2018 — Present · Welland, ON</em></p>
     <ul>
-      <li>Managed and supported endpoint platforms using SCCM and Intune, automated imaging and patching processes, and provided escalated technical support.</li>
+      <li>Managed and supported endpoint platforms using SCCM and Intune...</li>
       <li>Led implementation and administration of Microsoft Endpoint Configuration Manager (SCCM).</li>
-      <li>Created and maintained SCCM task sequences with custom packages and PowerShell scripts.</li>
-      <li>Packaged, tested, and deployed applications using SCCM, Intune, and AppsAnywhere.</li>
-      <li>Created MDM profiles for iOS and Android devices within Intune and automated patch management workflows with PatchMyPC.</li>
-      <li>Administered endpoints via Active Directory, Azure AD, and Group Policy; maintained print servers and licensing servers.</li>
-      <li>Recruited, mentored, and oversaw co-op student technicians; produced documentation and troubleshooting guides.</li>
+      <li>Created and maintained SCCM task sequences with PowerShell scripts.</li>
+      <li>Packaged, tested, and deployed applications using SCCM, Intune, AppsAnywhere.</li>
+      <li>Created MDM profiles for iOS and Android devices within Intune.</li>
+      <li>Automated patch management workflows using SCCM and PatchMyPC.</li>
+      <li>Administered endpoints via Active Directory, Azure AD, and Group Policy.</li>
+      <li>Produced documentation and troubleshooting steps for IT staff and end users.</li>
+      <li>Managed licensing servers, maintained print servers and Papercut MF environment.</li>
+      <li>Recruited, mentored, and oversaw co-op student technicians.</li>
     </ul>
   </section>
 
@@ -276,7 +182,7 @@
 
   <section id="education" class="card">
     <h2>Education & Certifications</h2>
-    <p class="lead">Diploma, Network and Cloud Technologies (Computer Systems Technician) — Niagara College</p>
+    <p>Diploma, Network and Cloud Technologies (Computer Systems Technician) — Niagara College</p>
     <ul>
       <li>ITIL V4 Foundation</li>
       <li>Microsoft Technology Associate — Networking Fundamentals</li>
@@ -304,14 +210,12 @@
     setTheme(current === 'dark' ? 'light' : 'dark');
   });
 
-  // Scroll animations
+  // Scroll reveal
   const cards = document.querySelectorAll('section.card');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if(e.isIntersecting) e.target.classList.add('show');
-    });
-  }, { threshold: 0.12 });
-  cards.forEach(c => io.observe(c));
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('show');});
+  },{threshold:0.12});
+  cards.forEach(c=>io.observe(c));
 </script>
 
 </body>
