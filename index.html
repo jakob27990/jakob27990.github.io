@@ -19,7 +19,7 @@
     --card: rgba(16,18,22,0.85);
     --text: #e6eef8;
     --muted: #9aa6b2;
-    --accent: #f59e0b;   /* orange in dark mode */
+    --accent: #f59e0b;
     --accent-2: #d97706;
   }
 
@@ -30,7 +30,7 @@
     color:var(--text);
     line-height:1.45;
     transition:background .35s,color .35s;
-    scroll-behavior: smooth; /* smooth scrolling */
+    scroll-behavior:smooth;
   }
 
   /* NAV */
@@ -49,6 +49,8 @@
     background:var(--accent);transition:width .25s ease;
   }
   .nav-right a:hover::after {width:100%;}
+  .nav-right a.active {color:var(--accent);}
+  .nav-right a.active::after {width:100%;}
   .theme-toggle {background:none;border:0;cursor:pointer;font-size:1.05rem;color:var(--text);padding:6px;}
 
   /* LAYOUT */
@@ -126,7 +128,7 @@
   }
   main section.show {opacity:1;transform:none;}
   h2 {color:var(--accent);margin-top:0;}
-  .skill-pill {
+  .pill {
     display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));
     color:white;padding:5px 12px;border-radius:999px;
     margin:4px;font-size:0.85rem;font-weight:600;
@@ -157,6 +159,7 @@
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
     <a href="#education">Education</a>
+    <a href="#hobbies">Hobbies</a>
   </div>
   <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
@@ -201,16 +204,16 @@
 
     <section id="skills"><h2>Skills & Strengths</h2>
       <div>
-        <span class="skill-pill">PowerShell</span>
-        <span class="skill-pill">SCCM / Intune</span>
-        <span class="skill-pill">Active Directory</span>
-        <span class="skill-pill">Group Policy</span>
-        <span class="skill-pill">Azure AD</span>
-        <span class="skill-pill">Patch Management</span>
-        <span class="skill-pill">Networking</span>
-        <span class="skill-pill">Windows Server</span>
-        <span class="skill-pill">Documentation</span>
-        <span class="skill-pill">Technical Support</span>
+        <span class="pill">PowerShell</span>
+        <span class="pill">SCCM / Intune</span>
+        <span class="pill">Active Directory</span>
+        <span class="pill">Group Policy</span>
+        <span class="pill">Azure AD</span>
+        <span class="pill">Patch Management</span>
+        <span class="pill">Networking</span>
+        <span class="pill">Windows Server</span>
+        <span class="pill">Documentation</span>
+        <span class="pill">Technical Support</span>
       </div>
     </section>
 
@@ -223,6 +226,15 @@
         <li>Microsoft Intune Fundamentals</li>
         <li>AppsAnywhere Associate</li>
       </ul>
+    </section>
+
+    <section id="hobbies"><h2>Hobbies & Interests</h2>
+      <div>
+        <span class="pill">General Aviation Flying</span>
+        <span class="pill">3D Printing</span>
+        <span class="pill">Motorcycles</span>
+        <span class="pill">Guitar</span>
+      </div>
     </section>
   </main>
 </div>
@@ -249,6 +261,23 @@
     entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('show');});
   },{threshold:0.1});
   cards.forEach(c=>io.observe(c));
+
+  // Scrollspy
+  const navLinks=document.querySelectorAll('.nav-right a');
+  const sections=document.querySelectorAll('main section');
+  window.addEventListener('scroll',()=>{
+    let fromTop=window.scrollY+65;
+    sections.forEach(sec=>{
+      if(sec.offsetTop<=fromTop && sec.offsetTop+sec.offsetHeight>fromTop){
+        navLinks.forEach(link=>{
+          link.classList.remove('active');
+          if(link.getAttribute('href').substring(1)===sec.id){
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  });
 </script>
 
 </body>
