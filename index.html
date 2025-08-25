@@ -5,171 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Jakob Degazio — IT Professional</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #f7f9fb;
-  --card: rgba(255,255,255,0.95);
-  --text: #111827;
-  --muted: #6b7280;
-  --accent: #0ea5ff;
-  --accent-2: #0066cc;
-}
-[data-theme="dark"] {
-  --bg: #0b0f14;
-  --card: rgba(16,18,22,0.85);
-  --text: #e6eef8;
-  --muted: #9aa6b2;
-  --accent: #f59e0b;
-  --accent-2: #d97706;
-}
-
-body {
-  margin:0;
-  font-family:"Inter",system-ui,Segoe UI,Roboto;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.45;
-  transition:background .35s,color .35s;
-  scroll-behavior:smooth;
-}
-
-/* NAV */
-nav {
-  position:fixed;top:0;left:0;right:0;height:54px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;z-index:40;
-  background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);
-}
-[data-theme="dark"] nav {background:rgba(10,12,15,0.7);}
-.nav-left a,.nav-right a {
-  color:var(--text);font-weight:600;text-decoration:none;margin:0 10px;position:relative;
-}
-.nav-right a::after {
-  content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;
-  background:var(--accent);transition:width .25s ease;
-}
-.nav-right a:hover::after {width:100%;}
-.nav-right a.active {color:var(--accent);}
-.nav-right a.active::after {width:100%;}
-.theme-toggle {background:none;border:0;cursor:pointer;font-size:1.05rem;color:var(--text);padding:6px;}
-
-/* LAYOUT */
-.resume-layout {
-  display:grid;
-  grid-template-columns:280px 1fr;
-  max-width:1200px;
-  margin:80px auto 40px;
-  padding:20px;
-  gap:25px;
-  animation:fadeIn 1s ease forwards;
-}
-@media (max-width:900px){
-  .resume-layout {grid-template-columns:1fr;text-align:center;}
-  .sidebar {position:static;align-items:center;}
-}
-
-/* Sidebar */
-.sidebar {
-  background:var(--card);
-  border-radius:12px;
-  padding:20px;
-  text-align:center;
-  box-shadow:0 4px 20px rgba(0,0,0,0.1);
-  display:flex;flex-direction:column;align-items:center;
-  animation:slideInLeft 1s ease forwards;
-  position:sticky;
-  top:80px;
-  height:fit-content;
-  align-self:start;
-}
-.sidebar h1 {margin:0;font-size:1.6rem;}
-.sidebar .title {font-size:0.95rem;color:var(--muted);margin:6px 0 15px;}
-.profile-photo {
-  width:170px;height:170px;border-radius:50%;object-fit:cover;
-  border:3px solid rgba(255,255,255,0.95);
-  box-shadow:0 0 18px rgba(14,165,255,0.5);
-  margin:15px 0;
-  transition:transform .3s ease, box-shadow .3s ease;
-}
-.profile-photo:hover {
-  transform:scale(1.07);
-  box-shadow:0 0 25px var(--accent);
-}
-.download-btn {
-  display:inline-block;margin-top:10px;
-  background:#fff;color:#111;
-  padding:8px 16px;border-radius:999px;
-  font-weight:700;text-decoration:none;
-  border:1px solid rgba(0,0,0,0.1);
-  box-shadow:0 2px 8px rgba(0,0,0,0.2);
-}
-.download-btn:hover {box-shadow:0 4px 14px rgba(0,0,0,0.3);}
-.link-chip {
-  display:block;margin:15px auto 0;
-  background:#fff;color:#0a66c2;padding:8px 14px;
-  border-radius:999px;text-decoration:none;font-weight:600;
-  border:1px solid rgba(10,102,194,0.25);
-  width:max-content;
-}
-
-/* Contact info */
-.contact-info {
-  font-size:0.9rem;
-  line-height:1.6;
-  margin-top:20px;
-  overflow:hidden;
-  max-height:1000px; /* enough to hold content */
-  transition:max-height 0.5s ease, opacity 0.4s ease;
-  opacity:1;
-}
-.contact-info.collapsed {
-  max-height:0;
-  opacity:0;
-}
-
-/* Main */
-main section {
-  background:var(--card);
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.08);
-  opacity:0;transform:translateY(20px);
-  transition: all .6s cubic-bezier(.2,.9,.3,1);
-}
-main section.show {opacity:1;transform:none;}
-h2 {color:var(--accent);margin-top:0;}
-.pill {
-  display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));
-  color:white;padding:5px 12px;border-radius:999px;
-  margin:4px;font-size:0.85rem;font-weight:600;
-}
-
-/* Animations */
-@keyframes fadeIn {from{opacity:0} to{opacity:1}}
-@keyframes slideInLeft {from{opacity:0;transform:translateX(-50px)} to{opacity:1;transform:none}}
-
-/* Mobile tweaks */
-@media (max-width:900px){
-  .sidebar .profile-photo {width:140px;height:140px;margin-left:auto;margin-right:auto;}
-  .sidebar .title {font-size:0.85rem;margin:6px 0 10px;}
-  .contact-info {font-size:0.8rem;line-height:1.4;margin-top:10px;}
-  .download-btn, .link-chip {margin:10px auto 0;padding:6px 12px;font-size:0.85rem;}
-}
-
-/* Print */
-@media print {
-  nav, .theme-toggle {display:none !important;}
-  body {background:white !important;color:black !important;}
-  .resume-layout {grid-template-columns:1fr;gap:0;margin:0;padding:0;}
-  .sidebar, main section {background:white !important;box-shadow:none !important;border:0 !important;padding:10px;}
-  .download-btn, .link-chip {display:none !important;}
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
+<!-- Desktop Navbar -->
+<nav class="desktop-nav">
   <div class="nav-left">
     <a href="index.html">🏠 Home</a>
   </div>
@@ -183,25 +24,48 @@ h2 {color:var(--accent);margin-top:0;}
   <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 
+<!-- Mobile Navbar -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="index.html">🏠 Home</a>
+    <button id="mobileThemeToggle">🌙</button>
+  </div>
+</nav>
+
+<!-- Mobile Profile -->
+<div id="mobileProfile" class="collapsed">
+  <div class="profile-top">
+    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo mobile-photo" id="mobilePhoto">
+    <div class="mobile-name-expand">
+      <h1>Jakob Degazio</h1>
+      <button class="expand-btn" id="expandBtn">Expand ▼</button>
+    </div>
+  </div>
+  <div class="profile-expanded">
+    <p>IT Professional • System Administration & Endpoint Management</p>
+    <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
+    <a class="link-chip" href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank">🔗 LinkedIn</a>
+    <div class="contact-info">
+      <p>Email: jake.degazio@gmail.com</p>
+      <p>Phone: 289-668-4711</p>
+    </div>
+  </div>
+</div>
+
+<!-- Desktop Layout -->
 <div class="resume-layout">
-  <!-- Sidebar -->
   <aside class="sidebar">
     <h1>Jakob Degazio</h1>
     <div class="title">IT Professional<br>System Administration & Endpoint Management</div>
-    <img src="jakob.jpg" alt="Portrait of Jakob Degazio" class="profile-photo" loading="lazy">
+    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo desktop-photo" id="desktopPhoto">
     <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
     <a class="link-chip" href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank">🔗 LinkedIn</a>
-
-    <!-- Collapse button for contact info -->
-    <button id="contactToggle" style="margin-top:10px;padding:5px 10px;font-size:0.8rem;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;">📇 Contact Info</button>
-    <div class="contact-info collapsed" id="contactInfo">
-      📞 289-668-4711<br>
-      ✉️ <a href="mailto:jake.degazio@gmail.com">jake.degazio@gmail.com</a><br>
-      🌍 Niagara Falls, ON
+    <div class="contact-info">
+      <p>Email: jake.degazio@gmail.com</p>
+      <p>Phone: 289-668-4711</p>
     </div>
   </aside>
 
-  <!-- Main -->
   <main>
     <section id="summary"><h2>Summary</h2>
       <p>Detail-oriented and proactive IT professional with strong problem-solving and communication skills. Experienced in education environments, managing complex systems, and supporting both technical teams and end users. Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.</p>
@@ -225,17 +89,17 @@ h2 {color:var(--accent);margin-top:0;}
     </section>
 
     <section id="skills"><h2>Skills & Strengths</h2>
-      <div>
-        <span class="pill">PowerShell</span>
-        <span class="pill">SCCM / Intune</span>
-        <span class="pill">Active Directory</span>
-        <span class="pill">Group Policy</span>
-        <span class="pill">Azure AD</span>
-        <span class="pill">Patch Management</span>
-        <span class="pill">Networking</span>
-        <span class="pill">Windows Server</span>
-        <span class="pill">Documentation</span>
-        <span class="pill">Technical Support</span>
+      <div class="pill-container">
+        <span class="pill">💻 PowerShell</span>
+        <span class="pill">🖥 SCCM / Intune</span>
+        <span class="pill">👥 Active Directory</span>
+        <span class="pill">🛠 Group Policy</span>
+        <span class="pill">☁️ Azure AD</span>
+        <span class="pill">🔧 Patch Management</span>
+        <span class="pill">🌐 Networking</span>
+        <span class="pill">🪟 Windows Server</span>
+        <span class="pill">📄 Documentation</span>
+        <span class="pill">💬 Technical Support</span>
       </div>
     </section>
 
@@ -251,70 +115,26 @@ h2 {color:var(--accent);margin-top:0;}
     </section>
 
     <section id="hobbies"><h2>Hobbies & Interests</h2>
-      <div>
-        <span class="pill">General Aviation Flying</span>
-        <span class="pill">3D Printing</span>
-        <span class="pill">Motorcycles</span>
-        <span class="pill">Guitar</span>
+      <div class="pill-container">
+        <span class="pill">✈️ General Aviation Flying</span>
+        <span class="pill">🖨 3D Printing</span>
+        <span class="pill">🏍 Motorcycles</span>
+        <span class="pill">🎸 Guitar</span>
       </div>
     </section>
   </main>
 </div>
 
-<script>
-  // Theme toggle
-  const themeToggle=document.getElementById('themeToggle');
-  const stored=localStorage.getItem('theme');
-  if(stored) document.documentElement.setAttribute('data-theme',stored);
-  function setTheme(t){
-    document.documentElement.setAttribute('data-theme',t);
-    localStorage.setItem('theme',t);
-    themeToggle.textContent=(t==='dark')?'☀️':'🌙';
-  }
-  themeToggle.textContent=(document.documentElement.getAttribute('data-theme')==='dark')?'☀️':'🌙';
-  themeToggle.addEventListener('click',()=>{ 
-    const current=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light';
-    setTheme(current==='dark'?'light':'dark');
-  });
+<!-- Floating Buttons -->
+<button class="back-to-top" id="backToTop">↑</button>
+<button class="print-btn" id="printBtn">🖨</button>
 
-  // Scroll reveal
-  const cards=document.querySelectorAll('main section');
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('show');});
-  },{threshold:0.1});
-  cards.forEach(c=>io.observe(c));
+<!-- Modal for Desktop Photo Zoom -->
+<div id="photoModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+</div>
 
-  // Scrollspy
-  const navLinks=document.querySelectorAll('.nav-right a');
-  const sections=document.querySelectorAll('main section');
-  window.addEventListener('scroll',()=>{
-    let fromTop=window.scrollY+65;
-    sections.forEach(sec=>{
-      if(sec.offsetTop<=fromTop && sec.offsetTop+sec.offsetHeight>fromTop){
-        navLinks.forEach(link=>{
-          link.classList.remove('active');
-          if(link.getAttribute('href').substring(1)===sec.id){
-            link.classList.add('active');
-          }
-        });
-      }
-    });
-  });
-
-  // Contact info toggle with smooth slide
-  const contactToggle = document.getElementById('contactToggle');
-  const contactInfo = document.getElementById('contactInfo');
-
-  contactToggle.addEventListener('click', ()=>{
-    if(contactInfo.classList.contains('collapsed')){
-      contactInfo.style.maxHeight = contactInfo.scrollHeight + 'px';
-      contactInfo.classList.remove('collapsed');
-    } else {
-      contactInfo.style.maxHeight = '0';
-      contactInfo.classList.add('collapsed');
-    }
-  });
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
