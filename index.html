@@ -47,8 +47,14 @@
     border-bottom:1px solid rgba(255,255,255,0.04);
   }
   .nav-left{display:flex;gap:18px;}
-  .nav-left a{color:var(--text);text-decoration:none;font-weight:600;font-size:0.95rem;opacity:.95;}
-  .nav-left a:hover{color:var(--accent);}
+  .nav-left a{
+    color:var(--text);text-decoration:none;font-weight:600;font-size:0.95rem;position:relative;
+  }
+  .nav-left a::after{
+    content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;
+    background:var(--accent);transition:width .25s ease;
+  }
+  .nav-left a:hover::after{width:100%;}
   .theme-toggle{background:none;border:0;cursor:pointer;font-size:1.05rem;color:var(--text);padding:8px;}
 
   /* HERO */
@@ -56,10 +62,12 @@
     position:relative;min-height:78vh;
     display:flex;align-items:center;justify-content:center;
     padding:120px 20px 60px;text-align:center;overflow:hidden;
+    opacity:0;transform:translateY(30px);
+    animation:fadeUp 1.2s ease forwards;
   }
   .hero::before{
     content:"";position:absolute;inset:0;z-index:-2;
-    /* background.jpg → optional background image file (same folder as this HTML) */
+    /* background.jpg → optional background image */
     background:
       linear-gradient(135deg, rgba(14,165,255,0.85), rgba(0,102,204,0.85)),
       url('background.jpg') center/cover no-repeat;
@@ -68,6 +76,7 @@
     animation: zoom 20s ease-in-out infinite alternate;
   }
   @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+  @keyframes fadeUp{to{opacity:1;transform:none}}
   .hero::after{
     content:"";position:absolute;inset:0;z-index:-1;
     background: radial-gradient(60% 40% at 50% 40%, rgba(0,0,0,0.1), rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.6) 100%);
@@ -77,26 +86,25 @@
   .hero h1{font-size:2.6rem;margin:0;text-shadow:0 6px 18px rgba(0,0,0,0.35);}
   .hero .title{font-size:1.05rem;font-weight:600;color:rgba(255,255,255,0.95);}
 
-  /* Download button — always white with black text */
+  /* Download button */
   .download-btn{
     margin-top:16px;
     display:inline-flex;align-items:center;gap:8px;
-    background:#ffffff;
-    color:#111 !important; /* keep black text in dark mode */
+    background:#ffffff !important;
+    color:#111 !important;
     padding:10px 20px;border-radius:999px;font-weight:700;text-decoration:none;
-    border:1px solid rgba(0,0,0,0.08);
+    border:1px solid rgba(0,0,0,0.12);
     box-shadow:0 6px 20px rgba(0,0,0,0.3);
     transition:transform .2s ease,box-shadow .2s ease;
   }
   .download-btn:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.45)}
-  [data-theme="dark"] .download-btn{background:#ffffff;color:#111 !important;border-color:rgba(255,255,255,0.18);}
 
-  /* jakob.jpg → profile photo (same folder) */
+  /* jakob.jpg → profile photo */
   .profile-photo{
     width:220px;height:220px;
     border-radius:50%;object-fit:cover;margin-top:18px;
     border:4px solid rgba(255,255,255,0.95);
-    box-shadow:0 0 25px rgba(14,165,255,0.65); /* glow */
+    box-shadow:0 0 25px rgba(14,165,255,0.65);
     transition:transform .25s ease,box-shadow .25s ease;
   }
   .profile-photo:hover{
@@ -104,7 +112,7 @@
     box-shadow:0 0 35px rgba(14,165,255,0.9);
   }
 
-  /* Link chip (LinkedIn) */
+  /* LinkedIn link chip */
   .link-chip{
     margin-top:10px;
     display:inline-flex;align-items:center;gap:8px;
@@ -116,7 +124,6 @@
     box-shadow:0 6px 16px rgba(0,0,0,0.25);
   }
   .link-chip:hover{transform:translateY(-2px)}
-  [data-theme="dark"] .link-chip{background:#ffffff;color:#0a66c2;}
 
   /* Sections */
   main{padding:30px 20px 80px;max-width:980px;margin:0 auto;}
@@ -129,9 +136,25 @@
   .skill-pill{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));
     color:white;padding:6px 12px;border-radius:999px;margin:6px 6px 0 0;font-weight:600;font-size:0.9rem;}
 
+  /* Footer */
+  footer{
+    background:var(--card);text-align:center;padding:30px;margin-top:40px;
+    border-top:1px solid rgba(0,0,0,0.1);
+  }
+  footer a{color:var(--accent-2);font-weight:600;text-decoration:none;margin:0 10px;}
+  footer a:hover{text-decoration:underline;}
+
   @media (max-width:720px){
     .hero h1{font-size:2rem}
     .profile-photo{width:180px;height:180px}
+  }
+
+  /* Print stylesheet */
+  @media print {
+    nav, .theme-toggle, .download-btn, .link-chip, footer { display:none !important; }
+    body { background:white !important; color:black !important; }
+    .hero::before, .hero::after { display:none !important; }
+    section.card { box-shadow:none !important; background:white !important; }
   }
 </style>
 </head>
@@ -154,16 +177,14 @@
     <h1>Jakob Degazio</h1>
     <div class="title">IT Professional | System Administration &amp; Endpoint Management</div>
 
-    <!-- JakobDegazioResume.pdf → resume file (same folder) -->
+    <!-- JakobDegazioResume.pdf -->
     <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
 
-    <!-- jakob.jpg → profile photo (same folder) -->
-    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo"
-         onerror="this.style.display='none'">
+    <!-- jakob.jpg -->
+    <img src="jakob.jpg" alt="Jakob Degazio" class="profile-photo" loading="lazy">
 
-    <!-- LinkedIn: REPLACE href with your actual LinkedIn URL from your resume -->
-    <!-- Example: https://www.linkedin.com/in/your-username/ -->
-    <a class="link-chip" href="https://www.linkedin.com/in/YOUR-LINKEDIN-URL" target="_blank" rel="noopener">
+    <!-- LinkedIn -->
+    <a class="link-chip" href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank" rel="noopener">
       🔗 LinkedIn
     </a>
   </div>
@@ -198,4 +219,59 @@
     <div>
       <span class="skill-pill">PowerShell</span>
       <span class="skill-pill">SCCM / Intune</span>
-      <span class="skill-pill">Active
+      <span class="skill-pill">Active Directory</span>
+      <span class="skill-pill">Group Policy</span>
+      <span class="skill-pill">Azure AD</span>
+      <span class="skill-pill">Patch Management</span>
+      <span class="skill-pill">Networking (DNS, Routers)</span>
+      <span class="skill-pill">Windows Server</span>
+      <span class="skill-pill">Documentation</span>
+      <span class="skill-pill">Technical Support</span>
+    </div>
+  </section>
+
+  <section id="education" class="card">
+    <h2>Education & Certifications</h2>
+    <p>Diploma, Network and Cloud Technologies (Computer Systems Technician) — Niagara College</p>
+    <ul>
+      <li>ITIL V4 Foundation</li>
+      <li>Microsoft Technology Associate — Networking Fundamentals</li>
+      <li>Microsoft Technology Associate — Windows Operating Systems</li>
+      <li>Microsoft Intune Fundamentals</li>
+      <li>AppsAnywhere Associate</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>📞 289-668-4711 · ✉️ <a href="mailto:jake.degazio@gmail.com">jake.degazio@gmail.com</a> · 
+     <a href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank">LinkedIn</a></p>
+</footer>
+
+<script>
+  // Theme toggle with memory
+  const themeToggle = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('theme');
+  if(stored) document.documentElement.setAttribute('data-theme', stored);
+
+  function setTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('theme', t);
+    themeToggle.textContent = (t === 'dark') ? '☀️' : '🌙';
+  }
+  themeToggle.textContent = (document.documentElement.getAttribute('data-theme') === 'dark') ? '☀️' : '🌙';
+  themeToggle.addEventListener('click', ()=>{
+    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // Scroll reveal
+  const cards = document.querySelectorAll('section.card');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('show');});
+  },{threshold:0.12});
+  cards.forEach(c=>io.observe(c));
+</script>
+
+</body>
+</html>
