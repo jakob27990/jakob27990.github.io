@@ -8,7 +8,7 @@
 <style>
   :root {
     --bg: #f7f9fb;
-    --card: rgba(255,255,255,0.9);
+    --card: rgba(255,255,255,0.95);
     --text: #111827;
     --muted: #6b7280;
     --accent: #0ea5ff;
@@ -16,11 +16,11 @@
   }
   [data-theme="dark"] {
     --bg: #0b0f14;
-    --card: rgba(16,18,22,0.8);
+    --card: rgba(16,18,22,0.85);
     --text: #e6eef8;
     --muted: #9aa6b2;
-    --accent: #4dabf7;
-    --accent-2: #2b7fc1;
+    --accent: #f59e0b;   /* orange in dark mode */
+    --accent-2: #d97706;
   }
 
   body {
@@ -30,19 +30,25 @@
     color:var(--text);
     line-height:1.45;
     transition:background .35s,color .35s;
+    scroll-behavior: smooth; /* smooth scrolling */
   }
 
-  /* NAV (keeps floating) */
+  /* NAV */
   nav {
-    position:fixed;top:0;left:0;right:0;height:50px;
-    display:flex;align-items:center;justify-content:flex-end;
+    position:fixed;top:0;left:0;right:0;height:54px;
+    display:flex;align-items:center;justify-content:space-between;
     padding:0 20px;z-index:40;
-    background:rgba(255,255,255,0.6);
-    backdrop-filter: blur(6px);
+    background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);
   }
-  [data-theme="dark"] nav {background:rgba(10,12,15,0.6);}
-  .nav-left a {margin-left:15px;color:var(--text);font-weight:600;text-decoration:none;}
-  .nav-left a:hover {color:var(--accent);}
+  [data-theme="dark"] nav {background:rgba(10,12,15,0.7);}
+  .nav-left a,.nav-right a {
+    color:var(--text);font-weight:600;text-decoration:none;margin:0 10px;position:relative;
+  }
+  .nav-right a::after {
+    content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;
+    background:var(--accent);transition:width .25s ease;
+  }
+  .nav-right a:hover::after {width:100%;}
   .theme-toggle {background:none;border:0;cursor:pointer;font-size:1.05rem;color:var(--text);padding:6px;}
 
   /* LAYOUT */
@@ -50,29 +56,43 @@
     display:grid;
     grid-template-columns:280px 1fr;
     max-width:1200px;
-    margin:70px auto;
+    margin:80px auto 40px;
     padding:20px;
     gap:25px;
+    animation:fadeIn 1s ease forwards;
   }
   @media (max-width:900px){
-    .resume-layout {grid-template-columns:1fr;}
+    .resume-layout {grid-template-columns:1fr;text-align:center;}
+    .sidebar {position:static;align-items:center;}
+    .sidebar .download-btn,.sidebar .link-chip {margin-left:auto;margin-right:auto;}
   }
 
-  /* LEFT COLUMN (Sidebar) */
+  /* Sidebar */
   .sidebar {
     background:var(--card);
     border-radius:12px;
     padding:20px;
     text-align:center;
     box-shadow:0 4px 20px rgba(0,0,0,0.1);
+    display:flex;flex-direction:column;align-items:center;
+    animation:slideInLeft 1s ease forwards;
+    position:sticky;
+    top:80px;
+    height:fit-content;
+    align-self:start;
   }
   .sidebar h1 {margin:0;font-size:1.6rem;}
   .sidebar .title {font-size:0.95rem;color:var(--muted);margin:6px 0 15px;}
   .profile-photo {
-    width:160px;height:160px;border-radius:50%;object-fit:cover;
-    border:3px solid rgba(255,255,255,0.9);
-    box-shadow:0 0 15px rgba(14,165,255,0.6);
+    width:170px;height:170px;border-radius:50%;object-fit:cover;
+    border:3px solid rgba(255,255,255,0.95);
+    box-shadow:0 0 18px rgba(14,165,255,0.5);
     margin:15px 0;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .profile-photo:hover {
+    transform:scale(1.07);
+    box-shadow:0 0 25px var(--accent);
   }
   .download-btn {
     display:inline-block;margin-top:10px;
@@ -90,20 +110,21 @@
     border:1px solid rgba(10,102,194,0.25);
     width:max-content;
   }
-  .contact-info {
-    margin-top:20px;font-size:0.9rem;line-height:1.6;
-  }
+  .contact-info {margin-top:20px;font-size:0.9rem;line-height:1.6;}
   .contact-info a {color:var(--accent-2);text-decoration:none;}
   .contact-info a:hover {text-decoration:underline;}
 
-  /* RIGHT COLUMN (Main content) */
+  /* Main */
   main section {
     background:var(--card);
     border-radius:12px;
     padding:20px;
     margin-bottom:20px;
     box-shadow:0 4px 20px rgba(0,0,0,0.08);
+    opacity:0;transform:translateY(20px);
+    transition: all .6s cubic-bezier(.2,.9,.3,1);
   }
+  main section.show {opacity:1;transform:none;}
   h2 {color:var(--accent);margin-top:0;}
   .skill-pill {
     display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));
@@ -111,15 +132,16 @@
     margin:4px;font-size:0.85rem;font-weight:600;
   }
 
-  /* PRINT */
+  /* Animations */
+  @keyframes fadeIn {from{opacity:0} to{opacity:1}}
+  @keyframes slideInLeft {from{opacity:0;transform:translateX(-50px)} to{opacity:1;transform:none}}
+
+  /* Print */
   @media print {
     nav, .theme-toggle {display:none !important;}
     body {background:white !important;color:black !important;}
     .resume-layout {grid-template-columns:1fr;gap:0;margin:0;padding:0;}
-    .sidebar, main section {
-      background:white !important;box-shadow:none !important;
-      border:0 !important;padding:10px;
-    }
+    .sidebar, main section {background:white !important;box-shadow:none !important;border:0 !important;padding:10px;}
     .download-btn, .link-chip {display:none !important;}
   }
 </style>
@@ -128,6 +150,9 @@
 
 <nav>
   <div class="nav-left">
+    <a href="index.html">🏠 Home</a>
+  </div>
+  <div class="nav-right">
     <a href="#summary">Summary</a>
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
@@ -137,7 +162,7 @@
 </nav>
 
 <div class="resume-layout">
-  <!-- SIDEBAR -->
+  <!-- Sidebar -->
   <aside class="sidebar">
     <h1>Jakob Degazio</h1>
     <div class="title">IT Professional<br>System Administration & Endpoint Management</div>
@@ -151,15 +176,13 @@
     </div>
   </aside>
 
-  <!-- MAIN CONTENT -->
+  <!-- Main -->
   <main>
-    <section id="summary">
-      <h2>Summary</h2>
+    <section id="summary"><h2>Summary</h2>
       <p>Detail-oriented and proactive IT professional with strong problem-solving and communication skills. Experienced in education environments, managing complex systems, and supporting both technical teams and end users. Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.</p>
     </section>
 
-    <section id="experience">
-      <h2>Experience</h2>
+    <section id="experience"><h2>Experience</h2>
       <h3>Information Technology Services (Various Positions) — Niagara College</h3>
       <p><em>2018 — Present · Welland, ON</em></p>
       <ul>
@@ -176,8 +199,7 @@
       </ul>
     </section>
 
-    <section id="skills">
-      <h2>Skills & Strengths</h2>
+    <section id="skills"><h2>Skills & Strengths</h2>
       <div>
         <span class="skill-pill">PowerShell</span>
         <span class="skill-pill">SCCM / Intune</span>
@@ -192,8 +214,7 @@
       </div>
     </section>
 
-    <section id="education">
-      <h2>Education & Certifications</h2>
+    <section id="education"><h2>Education & Certifications</h2>
       <p>Diploma, Network and Cloud Technologies (Computer Systems Technician) — Niagara College</p>
       <ul>
         <li>ITIL V4 Foundation</li>
@@ -221,6 +242,14 @@
     const current=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light';
     setTheme(current==='dark'?'light':'dark');
   });
+
+  // Scroll reveal
+  const cards=document.querySelectorAll('main section');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('show');});
+  },{threshold:0.1});
+  cards.forEach(c=>io.observe(c));
 </script>
+
 </body>
 </html>
