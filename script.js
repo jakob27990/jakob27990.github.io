@@ -51,12 +51,14 @@ window.addEventListener('scroll', ()=>{
 const printBtn=document.getElementById('printBtn');
 printBtn.addEventListener('click', ()=>{window.print();});
 
-// Mobile expand/collapse
+// Mobile expand/collapse with smooth slide
 const expandBtn=document.getElementById('expandBtn');
 const mobileProfile=document.getElementById('mobileProfile');
 expandBtn.addEventListener('click',()=>{
-  mobileProfile.classList.toggle('collapsed');
-  expandBtn.textContent = mobileProfile.classList.contains('collapsed') ? 'Expand ▼' : 'Collapse ▲';
+  mobileProfile.classList.toggle('expanded');
+  expandBtn.textContent = mobileProfile.classList.contains('expanded')
+    ? 'Collapse ▲'
+    : 'Expand ▼';
 });
 
 // Desktop image click expansion
@@ -69,4 +71,15 @@ profilePhoto.addEventListener('click',()=>{
     profilePhoto.style.transform='scale(2)';
     profilePhoto.classList.add('expanded');
   }
+});
+
+// Smooth scrolling for nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const target=document.querySelector(link.getAttribute('href'));
+    if(target){
+      target.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+  });
 });
