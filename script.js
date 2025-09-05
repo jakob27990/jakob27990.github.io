@@ -51,7 +51,7 @@ window.addEventListener('scroll', ()=>{
 const printBtn=document.getElementById('printBtn');
 printBtn.addEventListener('click', ()=>{window.print();});
 
-// Mobile expand/collapse with smooth slide
+// Mobile expand/collapse
 const expandBtn=document.getElementById('expandBtn');
 const mobileProfile=document.getElementById('mobileProfile');
 expandBtn.addEventListener('click',()=>{

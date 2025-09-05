@@ -22,7 +22,7 @@ body {
   color:var(--text);
   line-height:1.45;
   transition:background .35s,color .35s;
-  scroll-behavior:smooth; /* smooth scroll globally */
+  scroll-behavior:smooth;
 }
 
 /* NAVBAR */
@@ -61,11 +61,9 @@ nav {
     padding:10px;
     transition:max-height 0.4s ease;
     overflow:hidden;
-    max-height:80px; /* collapsed default */
+    max-height:80px;
   }
-  #mobileProfile.expanded {
-    max-height:600px; /* expanded */
-  }
+  #mobileProfile.expanded {max-height:600px;}
 
   .mobile-header {
     display:flex;
@@ -86,12 +84,9 @@ nav {
     box-shadow:0 0 25px var(--accent);
   }
 
-  /* expand toggle content */
   #mobileProfile:not(.expanded) .mobile-photo,
   #mobileProfile:not(.expanded) .mobile-actions,
-  #mobileProfile:not(.expanded) .contact-info {
-    display:none;
-  }
+  #mobileProfile:not(.expanded) .contact-info {display:none;}
 
   .mobile-actions {
     display:flex;
@@ -120,16 +115,38 @@ nav {
     cursor:pointer;
   }
 
-  /* Mobile layout */
   .resume-layout {
     grid-template-columns:1fr;
     margin-top:140px;
     padding:10px;
   }
   .sidebar {display:none;}
+
+  /* ✅ Full-width sections & centered titles on mobile */
+  main section {
+    max-width:100% !important;
+    margin:0 0 20px 0;
+    padding-left:10px;
+    padding-right:10px;
+  }
+  main section h2 {
+    text-align:center;
+  }
+
+  /* ✅ Pills full width + centered */
+  .pill-container {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin:0 auto;
+    padding:0;
+    gap:8px;
+  }
 }
 
-/* ✅ Tablet-friendly layout */
+/* Tablet tweaks */
 @media(min-width:600px) and (max-width:900px){
   main section {
     max-width:700px;
@@ -164,16 +181,48 @@ nav {
 .contact-info a:hover {text-decoration:underline;}
 
 /* MAIN */
-main section {background:var(--card);border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.08);opacity:0;transform:translateY(20px);transition: all .6s cubic-bezier(.2,.9,.3,1);}
+main section {
+  background:var(--card);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  opacity:0;
+  transform:translateY(20px);
+  transition: all .6s cubic-bezier(.2,.9,.3,1);
+}
 main section.show {opacity:1;transform:none;}
 h2 {color:var(--accent);margin-top:0;}
-.pill {display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:5px 12px;border-radius:999px;margin:4px;font-size:0.85rem;font-weight:600;}
 
-/* ✅ Always center pills */
+/* ✅ Pills fully centered + hover effect */
 .pill-container {
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
+  align-items:center;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  padding:0;
+  box-sizing:border-box;
+  text-align:center;
+  gap:8px;
+}
+.pill {
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:white;
+  padding:5px 12px;
+  border-radius:999px;
+  font-size:0.85rem;
+  font-weight:600;
+  white-space:nowrap;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+@media (hover: hover) {
+  .pill:hover {
+    transform:scale(1.08);
+    box-shadow:0 0 12px rgba(14,165,255,0.5);
+  }
 }
 
 /* PRINT */
@@ -186,5 +235,18 @@ h2 {color:var(--accent);margin-top:0;}
 }
 
 /* BUTTONS */
-#backToTop, #printBtn {position:fixed;bottom:20px;right:20px;background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:50;}
+#backToTop, #printBtn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  z-index:50;
+}
 #backToTop:hover, #printBtn:hover {background:var(--accent-2);}
