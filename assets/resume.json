@@ -1,0 +1,84 @@
+{
+  "summary": "Detail-oriented and proactive IT professional with strong problem-solving and communication skills. Experienced in education environments, managing complex systems, and supporting both technical teams and end users. Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.",
+  "experience": [
+    {
+      "company": "Niagara College",
+      "role": "Information Technology Services (Various Positions)",
+      "location": "Welland, ON",
+      "start": "2018",
+      "end": "Present",
+      "bullets": [
+        "Managed and supported endpoint platforms using SCCM and Intune.",
+        "Led implementation and administration of Microsoft Endpoint Configuration Manager (SCCM).",
+        "Created and maintained SCCM task sequences with PowerShell scripts.",
+        "Packaged, tested, and deployed applications using SCCM, Intune, AppsAnywhere.",
+        "Created MDM profiles for iOS and Android devices within Intune.",
+        "Automated patch management workflows using SCCM and PatchMyPC.",
+        "Administered endpoints via Active Directory, Azure AD, and Group Policy.",
+        "Produced documentation and troubleshooting steps for IT staff and end users.",
+        "Managed licensing servers, maintained print servers and Papercut MF environment.",
+        "Recruited, mentored, and oversaw co-op student technicians."
+      ]
+    }
+  ],
+  "skills": [
+    "PowerShell",
+    "SCCM / Intune",
+    "Active Directory",
+    "Group Policy",
+    "Azure AD",
+    "Patch Management",
+    "Networking",
+    "Windows Server",
+    "Documentation",
+    "Technical Support"
+  ],
+  "education": [
+    {
+      "title": "Diploma, Network and Cloud Technologies (Computer Systems Technician) — Niagara College",
+      "bullets": [
+        "ITIL V4 Foundation",
+        "Microsoft Technology Associate — Networking Fundamentals",
+        "Microsoft Technology Associate — Windows Operating Systems",
+        "Microsoft Intune Fundamentals",
+        "AppsAnywhere Associate"
+      ]
+    }
+  ],
+  "hobbies": [
+    "General Aviation Flying",
+    "3D Printing",
+    "Motorcycles",
+    "Guitar"
+  ],
+  "sections": [
+    {
+      "id": "tools",
+      "title": "Tools I Use",
+      "type": "pills",
+      "items": [
+        "VS Code",
+        "Git",
+        "Azure DevOps",
+        "Papercut MF",
+        "AppsAnywhere"
+      ]
+    },
+    {
+      "id": "projects",
+      "title": "Selected Projects",
+      "type": "bullets",
+      "items": [
+        "Automated imaging pipeline with PowerShell and SCCM task sequences.",
+        "Intune Autopilot rollout improving OOBE time by 45%.",
+        "Self-service app delivery with AppsAnywhere and targeted collections."
+      ]
+    }
+  ],
+  "contact": {
+    "phone": "289-668-4711",
+    "email": "jake.degazio@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/jakob-degazio1/",
+    "resumeFile": "assets/JakobDegazioResume.pdf"
+  }
+}

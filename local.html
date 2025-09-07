@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local Preview — Jakob DeGazio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script>window.SKIP_AUTO_LOAD = true;</script>
+</head>
+<body>
+  <nav aria-label="Primary">
+    <div class="nav-left">
+      <span class="brand">Local Preview — Jakob DeGazio</span>
+    </div>
+    <div class="nav-right" id="navRight">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <div class="resume-layout" style="margin-top:88px;">
+    <aside class="sidebar desktop-only" style="text-align:left">
+      <h2>Load content</h2>
+      <p>Choose <strong>assets/resume.json</strong> (or any JSON file) to preview without a server.</p>
+      <input id="fileInput" type="file" accept="application/json,.json" />
+      <hr>
+      <img class="profile-photo" src="assets/jakob.jpg" alt="Jakob DeGazio portrait" />
+      <h1>Jakob DeGazio</h1>
+      <div class="title">IT Professional</div>
+      <div class="subtitle">System Administration &amp; Endpoint Management</div>
+    </aside>
+
+    <main id="contentRoot" aria-live="polite">
+      <section class="show">
+        <h2>Waiting for <code>resume.json</code>…</h2>
+        <p>Select the file on the left to render the resume content here.</p>
+      </section>
+    </main>
+  </div>
+
+  <div id="imageModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" data-close="true"></div>
+    <div class="modal__dialog" role="document">
+      <button class="modal__close" id="modalClose" aria-label="Close">×</button>
+      <img id="modalImage" alt="Jakob DeGazio portrait enlarged" />
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    fileInput.addEventListener('change', (e)=>{
+      const f = e.target.files && e.target.files[0];
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = (ev)=>{
+        try{
+          const data = JSON.parse(ev.target.result);
+          if (typeof renderResume === 'function') {
+            renderResume(data);
+            if (typeof buildNavFromSections === 'function') buildNavFromSections();
+          }
+        }catch(err){ alert('Invalid JSON: ' + err.message); }
+      };
+      reader.readAsText(f);
+    });
+  </script>
+</body>
+</html>

@@ -4,16 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jakob DeGazio — IT Professional</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-
-  <!-- Top Navbar (desktop/tablet) -->
   <nav aria-label="Primary">
     <div class="nav-left">
       <a class="brand" href="index.html">Jakob DeGazio — IT Professional</a>
     </div>
-    <div class="nav-right">
+    <div class="nav-right" id="navRight">
       <a href="#summary">Summary</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
@@ -23,155 +21,64 @@
     </div>
   </nav>
 
-  <!-- Mobile sticky profile bar -->
   <header id="mobileProfile" class="mobile-only" role="banner">
     <div class="mobile-header">
       <div class="header-row">
         <div class="id-left">
-          <img class="mobile-avatar" src="jakob.jpg" alt="Jakob DeGazio headshot" />
+          <img class="mobile-avatar" src="assets/jakob.jpg" alt="Jakob DeGazio headshot" />
           <h1 class="mobile-name">Jakob DeGazio</h1>
+          <button id="expandBtn" class="expand-btn inline" aria-expanded="false" aria-label="Expand content">
+            <svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+            </svg>
+          </button>
         </div>
         <button id="mobileThemeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
       </div>
 
-      <!-- side compact expand control (icon only) -->
-      <button id="expandBtn" class="expand-btn side" aria-expanded="false" aria-label="Expand content">
-        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
-          <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
-        </svg>
-      </button>
-
-      <!-- Larger photo appears only when expanded -->
-      <img class="mobile-photo profile-photo" src="jakob.jpg" alt="Jakob DeGazio portrait" />
+      <img class="mobile-photo profile-photo" src="assets/jakob.jpg" alt="Jakob DeGazio portrait" />
 
       <div class="title">IT Professional</div>
       <div class="subtitle">System Administration &amp; Endpoint Management</div>
 
       <div class="mobile-actions">
-        <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
-        <a class="link-chip" href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank" rel="noopener">🔗 LinkedIn</a>
+        <a id="dlMobile" class="download-btn" href="assets/JakobDegazioResume.pdf" download>📄 Download Resume</a>
+        <a id="lnMobile" class="link-chip" href="#" target="_blank" rel="noopener">🔗 LinkedIn</a>
       </div>
 
-      <!-- Contact (hidden until clicked; visible in print) -->
       <div class="contact-block">
         <button class="contact-toggle" aria-expanded="false">Show contact info</button>
-        <div class="contact-info is-hidden"
-             data-email-user="jake.degazio"
-             data-email-domain="gmail.com"
-             data-phone="289-668-4711">
-          <noscript>
-            <p><strong>Phone:</strong> 289-668-4711<br><strong>Email:</strong> jake.degazio@gmail.com</p>
-          </noscript>
-        </div>
+        <div id="contactInfoMobile" class="contact-info is-hidden"></div>
       </div>
     </div>
   </header>
 
-  <!-- Main 2-column desktop layout -->
   <div class="resume-layout">
-    <!-- Sidebar (desktop) -->
     <aside class="sidebar desktop-only">
-      <img class="profile-photo" src="jakob.jpg" alt="Jakob DeGazio portrait" />
+      <img class="profile-photo" src="assets/jakob.jpg" alt="Jakob DeGazio portrait" />
       <h1>Jakob DeGazio</h1>
       <div class="title">IT Professional</div>
       <div class="subtitle">System Administration &amp; Endpoint Management</div>
 
-      <a class="download-btn" href="JakobDegazioResume.pdf" download>📄 Download Resume</a>
-      <a class="link-chip" href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank" rel="noopener">🔗 LinkedIn</a>
+      <a id="dlDesktop" class="download-btn" href="assets/JakobDegazioResume.pdf" download>📄 Download Resume</a>
+      <a id="lnDesktop" class="link-chip" href="#" target="_blank" rel="noopener">🔗 LinkedIn</a>
 
-      <!-- Contact (hidden until clicked; visible in print) -->
       <div class="contact-block">
         <button class="contact-toggle" aria-expanded="false">Show contact info</button>
-        <div class="contact-info is-hidden"
-             data-email-user="jake.degazio"
-             data-email-domain="gmail.com"
-             data-phone="289-668-4711">
-          <noscript>
-            <p><strong>Phone:</strong> 289-668-4711<br><strong>Email:</strong> jake.degazio@gmail.com</p>
-          </noscript>
-        </div>
+        <div id="contactInfoDesktop" class="contact-info is-hidden"></div>
       </div>
     </aside>
 
-    <!-- Main content -->
-    <main>
-      <section id="summary" aria-labelledby="summary-title">
-        <h2 id="summary-title">Summary</h2>
-        <p>
-          Detail-oriented and proactive IT professional with strong problem-solving and communication skills.
-          Experienced in education environments, managing complex systems, and supporting both technical teams and end users.
-          Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.
-        </p>
-      </section>
-
-      <section id="experience" aria-labelledby="experience-title">
-        <h2 id="experience-title">Experience</h2>
-        <h3>Information Technology Services (Various Positions) — Niagara College</h3>
-        <p>2018 — Present · Welland, ON</p>
-        <ul>
-          <li>Managed and supported endpoint platforms using SCCM and Intune.</li>
-          <li>Led implementation and administration of Microsoft Endpoint Configuration Manager (SCCM).</li>
-          <li>Created and maintained SCCM task sequences with PowerShell scripts.</li>
-          <li>Packaged, tested, and deployed applications using SCCM, Intune, AppsAnywhere.</li>
-          <li>Created MDM profiles for iOS and Android devices within Intune.</li>
-          <li>Automated patch management workflows using SCCM and PatchMyPC.</li>
-          <li>Administered endpoints via Active Directory, Azure AD, and Group Policy.</li>
-          <li>Produced documentation and troubleshooting steps for IT staff and end users.</li>
-          <li>Managed licensing servers, maintained print servers and Papercut MF environment.</li>
-          <li>Recruited, mentored, and oversaw co‑op student technicians.</li>
-        </ul>
-      </section>
-
-      <section id="skills" aria-labelledby="skills-title">
-        <h2 id="skills-title">Skills &amp; Strengths</h2>
-        <div class="pill-container">
-          <span class="pill">PowerShell</span>
-          <span class="pill">SCCM / Intune</span>
-          <span class="pill">Active Directory</span>
-          <span class="pill">Group Policy</span>
-          <span class="pill">Azure AD</span>
-          <span class="pill">Patch Management</span>
-          <span class="pill">Networking</span>
-          <span class="pill">Windows Server</span>
-          <span class="pill">Documentation</span>
-          <span class="pill">Technical Support</span>
-        </div>
-      </section>
-
-      <section id="education" aria-labelledby="education-title">
-        <h2 id="education-title">Education &amp; Certifications</h2>
-        <p><strong>Diploma, Network and Cloud Technologies (Computer Systems Technician)</strong> — Niagara College</p>
-        <ul>
-          <li>ITIL V4 Foundation</li>
-          <li>Microsoft Technology Associate — Networking Fundamentals</li>
-          <li>Microsoft Technology Associate — Windows Operating Systems</li>
-          <li>Microsoft Intune Fundamentals</li>
-          <li>AppsAnywhere Associate</li>
-        </ul>
-      </section>
-
-      <section id="hobbies" aria-labelledby="hobbies-title">
-        <h2 id="hobbies-title">Hobbies &amp; Interests</h2>
-        <div class="pill-container">
-          <span class="pill">General Aviation Flying</span>
-          <span class="pill">3D Printing</span>
-          <span class="pill">Motorcycles</span>
-          <span class="pill">Guitar</span>
-        </div>
-      </section>
-    </main>
+    <main id="contentRoot" aria-live="polite"></main>
   </div>
 
-  <!-- Print button (hidden on mobile via CSS) -->
   <button id="printBtn" class="fab" aria-label="Print resume" title="Print">
     <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22" focusable="false">
-      <path fill="currentColor"
-        d="M6 9V3h12v6h-2V5H8v4H6zm-2 2h16a2 2 0 0 1 2 2v5h-4v3H6v-3H2v-5a2 2 0 0 1 2-2zm4 8h8v-3H8v3zm12-5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+      <path fill="currentColor" d="M6 9V3h12v6h-2V5H8v4H6zm-2 2h16a2 2 0 0 1 2 2v5h-4v3H6v-3H2v-5a2 2 0 0 1 2-2zm4 8h8v-3H8v3zm12-5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
     </svg>
   </button>
 
-  <!-- Image modal -->
-  <div id="imageModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="imageModalTitle">
+  <div id="imageModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal__backdrop" data-close="true"></div>
     <div class="modal__dialog" role="document">
       <button class="modal__close" id="modalClose" aria-label="Close">×</button>

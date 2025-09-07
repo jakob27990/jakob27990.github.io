@@ -1,0 +1,49 @@
+{
+  // === Summary ===
+  "summary": "Short professional summary...",
+
+  // === Experience ===
+  "experience": [
+    {
+      "company": "Company Name",
+      "role": "Your Role",
+      "location": "City, ST",
+      "start": "YYYY",
+      "end": "Present",
+      "bullets": [
+        "Impact/result bullet 1",
+        "Impact/result bullet 2"
+      ]
+    }
+  ],
+
+  // === Skills (pills) ===
+  "skills": ["PowerShell", "SCCM / Intune", "Active Directory"],
+
+  // === Education ===
+  "education": [
+    {
+      "title": "Diploma, Network and Cloud Technologies — Niagara College",
+      "bullets": ["ITIL V4 Foundation", "MTA — Networking Fundamentals"]
+    }
+  ],
+
+  // === Hobbies (pills) ===
+  "hobbies": ["General Aviation Flying", "3D Printing"],
+
+  // === Optional custom sections ===
+  "sections": [
+    { "title": "Tools I Use", "type": "pills", "items": ["VS Code", "Git", "Azure DevOps"] },
+    { "title": "Selected Projects", "type": "bullets", "items": ["Project 1", "Project 2"] },
+    { "title": "Objective", "type": "paragraph", "text": "What I’m focusing on next..." },
+    { "title": "Portfolio", "type": "html", "html": "<p>See <a href=\\"https://example.com\\">examples</a>.</p>" }
+  ],
+
+  // === Contact + links ===
+  "contact": {
+    "phone": "289-668-4711",
+    "email": "jake.degazio@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/jakob-degazio1/",
+    "resumeFile": "assets/JakobDegazioResume.pdf"
+  }
+}
