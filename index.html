@@ -3,90 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jakob DeGazio — IT Professional</title>
-  <link rel="stylesheet" href="style.css?v=13" />
+  <title>Home — Jakob DeGazio</title>
+  <link rel="stylesheet" href="style.css?v=18" />
+  <script>window.SKIP_AUTO_LOAD = true;</script>
 </head>
 <body>
   <nav aria-label="Primary">
     <div class="nav-left">
-      <a class="brand" href="index.html">Jakob DeGazio — IT Professional</a>
+      <a class="nav-link home-btn" href="index.html" aria-label="Home" aria-current="page">
+  <img src="assets/home.svg" alt=""/>
+  <span>Home</span>
+</a>
+      <a class="nav-link" href="pages/resume.html">Resume</a>
+      <a class="nav-link" href="pages/film.html">Film Photography</a>
+      <a class="nav-link" href="pages/printing.html">3D Printing</a>
     </div>
     <div class="nav-right" id="navRight">
-      <a href="#summary">Summary</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#hobbies">Hobbies</a>
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </div>
   </nav>
 
-  <header id="mobileProfile" class="mobile-only" role="banner">
-    <div class="mobile-header">
-      <div class="header-row">
-        <div class="id-left">
-          <img class="mobile-avatar" src="assets/portrait.jpg" alt="Jakob DeGazio headshot" />
-          <h1 class="mobile-name">Jakob DeGazio</h1>
-          <button id="expandBtn" class="expand-btn inline" aria-expanded="false" aria-label="Expand content">
-            <svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
-              <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
-            </svg>
-          </button>
-        </div>
-        <button id="mobileThemeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-      </div>
-
-      <img class="mobile-photo profile-photo" src="assets/portrait.jpg" alt="Jakob DeGazio portrait" />
-
-      <div class="title">IT Professional</div>
-      <div class="subtitle">System Administration &amp; Endpoint Management</div>
-
-      <div class="mobile-actions">
-        <a id="dlMobile" class="download-btn" href="#" download>📄 Download Resume</a>
-        <a id="lnMobile" class="link-chip" href="#" target="_blank" rel="noopener">🔗 LinkedIn</a>
-      </div>
-
-      <div class="contact-block">
-        <button class="contact-toggle" aria-expanded="false">Show contact info</button>
-        <div id="contactInfoMobile" class="contact-info is-hidden"></div>
-      </div>
-    </div>
-  </header>
-
-  <div class="resume-layout">
-    <aside class="sidebar desktop-only">
-      <img class="profile-photo" src="assets/portrait.jpg" alt="Jakob DeGazio portrait" />
-      <h1>Jakob DeGazio</h1>
-      <div class="title">IT Professional</div>
-      <div class="subtitle">System Administration &amp; Endpoint Management</div>
-
-      <a id="dlDesktop" class="download-btn" href="#" download>📄 Download Resume</a>
-      <a id="lnDesktop" class="link-chip" href="#" target="_blank" rel="noopener">🔗 LinkedIn</a>
-
-      <div class="contact-block">
-        <button class="contact-toggle" aria-expanded="false">Show contact info</button>
-        <div id="contactInfoDesktop" class="contact-info is-hidden"></div>
-      </div>
-    </aside>
-
-    <main id="contentRoot" aria-live="polite"></main>
-  </div>
-
-  <button id="printBtn" class="fab" aria-label="Print resume" title="Print">
-    <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22" focusable="false">
-      <path fill="currentColor" d="M6 9V3h12v6h-2V5H8v4H6zm-2 2h16a2 2 0 0 1 2 2v5h-4v3H6v-3H2v-5a2 2 0 0 1 2-2zm4 8h8v-3H8v3zm12-5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-    </svg>
-  </button>
-
-  <!-- Image modal -->
-  <div id="imageModal" class="modal hidden" role="dialog" aria-modal="true">
-    <div class="modal__backdrop" data-close="true"></div>
-    <div class="modal__dialog" role="document">
-      <button class="modal__close" id="modalClose" aria-label="Close">×</button>
-      <img id="modalImage" alt="Jakob DeGazio portrait enlarged" />
+  <div class="mobile-only">
+    <div class="mobile-topnav" role="navigation" aria-label="Mobile">
+      <a href="index.html" aria-current="page"><img src="assets/home.svg" alt="Home"></a>
+      <a href="pages/resume.html">Resume</a>
+      <a href="pages/film.html">Film Photography</a>
+      <a href="pages/printing.html">3D Printing</a>
     </div>
   </div>
 
-  <script src="script.js?v=13"></script>
+  <div class="resume-layout" style="max-width: 960px;">
+    <main style="grid-column: 1 / -1;">
+      <section class="show" style="text-align:center">
+        <h2>Site under construction</h2>
+        <p>Thanks for visiting. I’m currently building out more pages. In the meantime, you can <a href="pages/resume.html">view my resume</a>.</p>
+      </section>
+      <section class="show" style="text-align:center">
+        <p><strong>Quick links:</strong> <a href="pages/resume.html">View my resume</a> · <a href="https://www.linkedin.com/in/jakob-degazio1/" target="_blank" rel="noopener">LinkedIn</a></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js?v=18"></script>
 </body>
 </html>
