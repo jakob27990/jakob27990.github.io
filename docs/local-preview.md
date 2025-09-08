@@ -1,7 +1,9 @@
-# Local preview (v24)
+# Local preview — v23
 
-**Recommended**: open `local-preview.html`.
-1. Upload `assets/resume.json`.
-2. Click **Open Resume** to render the page using the locally stored JSON (no server needed).
+Prefer **`local-preview.html`** for the simplest local workflow:
+1. Open `local-preview.html` (double‑click).
+2. Upload `assets/resume.json`.
+3. Click **Open Resume**.
+4. Browse the site — it will use the JSON from your browser storage.
 
-Alternative: open `index.html?local=1` to show a compact upload bar under the navbar.
+Alternatively, open `index.html` (file://) and use the local preview bar that appears under the navbar.

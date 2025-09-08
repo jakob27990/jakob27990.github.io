@@ -1,9 +1,10 @@
 # Changelog
 
-## v24
-- Fix: removed fragile regex from `assetUrl()`; unified render order; right-hand nav now built *after* sections are rendered.
-- Cleanup: CSS reorganized, comments simplified, duplicates removed; HTML lightly tidied; docs updated.
-- Local preview: kept dedicated `local-preview.html` and optional Home bar (`?local=1`).
-
 ## v23
-- JSON-driven nav; mobile layout fixes; separate local preview file.
+- Added dedicated `local-preview.html` (and optional bar on Home) for file:// workflows.
+- Fixed JSON-driven nav and ensured robust rendering order & logging.
+- Restored mobile card centering & stacked actions.
+- Kept `contact-toggle` styling; ensured class remains in HTML.
+
+## v22
+- JSON-driven right nav; mobile fixes; initial local preview bar.

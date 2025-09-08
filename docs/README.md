@@ -1,18 +1,12 @@
-# Site Docs (v24)
+# Site Docs (v23)
 
-## Edit one file
-All Resume content **and** right-hand section navigation come from `assets/resume.json`.
-- Change labels and order under `nav.sections`.
-- Add custom sections by appending to `nav.sections` and providing optional HTML under `sectionsContent` (see schema).
+## One place to edit
+- Update **`assets/resume.json`** to change content **and** the right-side navigation labels/order for the Resume page.
+- To add a custom section, append it to `nav.sections` and add optional HTML in `sectionsContent`.
 
 ## Local preview (no server)
-- Open `local-preview.html` and upload your `assets/resume.json`. It is stored in your browser (localStorage).
-- Click **Open Resume** to render. You can also open `index.html` and add `?local=1` to show a small upload bar.
+- Open **`local-preview.html`** (or `index.html` with `file://` or `?local=1`) and upload your JSON once. It is stored in your browser and used by the Resume page.
+- Use the buttons to jump to any page. Click **Clear** to remove the local JSON.
 
 ## Deploy
-- Upload the whole site (GitHub Pages or any static host).
-- Ensure `/assets/JakobDeGazio - Resume.pdf` exists.
-
-## Accessibility & UX
-- Theme toggle has a visible focus outline.
-- Right-hand section nav is built from the actual sections, ensuring scrollspy and labels stay in sync.
+- Push the whole folder to your host (e.g., GitHub Pages). Ensure the PDF exists at `/assets/JakobDeGazio - Resume.pdf`.

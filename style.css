@@ -177,3 +177,35 @@ h2{color:var(--accent);margin-top:0;text-align:center}
   .contact-toggle{display:none!important}
   .contact-info{display:block!important}
 }
+
+
+:root {
+  --bg-image-mobile: url('assets/bg-mobile.jpg');
+  --bg-image-tablet: url('assets/bg-tablet.jpg');
+  --bg-image-desktop: url('assets/bg-desktop.jpg');
+}
+
+body {
+  background-color: var(--bg);
+  background-image: var(--bg-image-desktop);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@media (max-width: 600px) {
+  body {
+    background-image: var(--bg-image-mobile);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    background-image: var(--bg-image-tablet);
+  }
+}
+
+[data-theme="dark"] body {
+  background-image: none;
+}
