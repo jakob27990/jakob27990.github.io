@@ -1,4 +1,28 @@
 {
+  "nav": {
+    "sections": [
+      {
+        "id": "summary",
+        "label": "Summary"
+      },
+      {
+        "id": "experience",
+        "label": "Experience"
+      },
+      {
+        "id": "skills",
+        "label": "Skills"
+      },
+      {
+        "id": "education",
+        "label": "Education"
+      },
+      {
+        "id": "hobbies",
+        "label": "Hobbies"
+      }
+    ]
+  },
   "summary": "Detail-oriented and proactive IT professional with strong problem-solving and communication skills. Experienced in education environments, managing complex systems, and supporting both technical teams and end users. Adaptable, collaborative, and committed to continuous learning and delivering effective technology solutions.",
   "experience": [
     {
@@ -56,5 +80,10 @@
     "email": "jake.degazio@gmail.com",
     "linkedin": "https://www.linkedin.com/in/jakob-degazio1/",
     "resumeFile": "/assets/JakobDeGazio - Resume.pdf"
+  },
+  "sectionsContent": {
+    "projects": {
+      "html": "<p>Coming soon — sample custom section.</p>"
+    }
   }
 }
