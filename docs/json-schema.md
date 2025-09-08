@@ -1,4 +1,4 @@
-# JSON schema (v23)
+# JSON schema (v24)
 
 ```jsonc
 {
@@ -9,7 +9,7 @@
       { "id": "skills",      "label": "Skills" },
       { "id": "education",   "label": "Education" },
       { "id": "hobbies",     "label": "Hobbies" }
-      // add more like {"id":"projects","label":"Projects"}
+      // Add more: {"id":"projects","label":"Projects"}
     ]
   },
   "summary": "...",
@@ -28,3 +28,8 @@
   }
 }
 ```
+
+**Notes**
+- Right-hand nav is built from the rendered sections, keeping labels aligned with the section content.
+- Custom section ids not in the standard set use `sectionsContent[id].html` (falls back to a placeholder if missing).
+- PDF path should be root-relative (`/assets/...`).

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Local Preview — Jakob DeGazio</title>
-  <link rel="stylesheet" href="style.css?v=23" />
+  <link rel="stylesheet" href="style.css?v=24" />
   <style>
     .lp-wrap{max-width:900px;margin:90px auto 40px;padding:16px;background:var(--card);border-radius:12px;border:1px solid var(--nav-border);box-shadow:0 10px 28px rgba(0,0,0,.12)}
     .lp-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -25,7 +25,7 @@
 
   <div class="lp-wrap">
     <h2>Local Preview</h2>
-    <p class="lp-note">Open this file via <code>file://</code>. Upload your <code>assets/resume.json</code> below to preview the full site without a server.</p>
+    <p class="lp-note">Open this file via <code>file://</code>. Upload your <code>assets/resume.json</code> to preview the full site without a server.</p>
     <div class="lp-row">
       <input id="jsonInput" type="file" accept="application/json" />
       <button id="clearLocalJson" class="link-chip">Clear</button>
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=23"></script>
+  <script src="script.js?v=24"></script>
   <script>
     (function(){
       const input = document.getElementById('jsonInput');
@@ -48,12 +48,8 @@
       input.addEventListener('change', async (e)=>{
         const f=e.target.files && e.target.files[0];
         if(!f) return;
-        try{
-          const text=await f.text();
-          JSON.parse(text);
-          localStorage.setItem('resumeJSON', text);
-          status.textContent='Loaded ✓ (stored in this browser)';
-        }catch(err){ alert('Invalid JSON: '+err.message); }
+        try{ const text=await f.text(); JSON.parse(text); localStorage.setItem('resumeJSON', text); status.textContent='Loaded ✓ (stored)'; }
+        catch(err){ alert('Invalid JSON: '+err.message); }
       });
       clearBtn.addEventListener('click', ()=>{ localStorage.removeItem('resumeJSON'); status.textContent='Cleared'; });
     })();
