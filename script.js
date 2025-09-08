@@ -1,8 +1,9 @@
 /**
- * Shared site script — v22
- * - Dynamic right nav from JSON nav.sections
- * - Local preview: upload JSON on Home to render full site without a server (file://)
+ * Shared site script — v23
+ * - JSON-driven right nav (nav.sections)
+ * - Local preview: separate local-preview.html, plus optional bar on Home
  * - Robust asset URL helper for file:// and https
+ * - Extra logging + safer rendering sequence
  */
 
 // Theme toggle ----------------------------------------------------------
@@ -30,12 +31,12 @@ function assetUrl(rel){
   rel = rel.replace(/^\//,'');
   if(location.protocol==='file:'){
     const inPages = /\/pages\//.test(location.pathname) || /\pages\/.test(location.pathname);
-    return (inPages? '../' : '') + rel; // e.g., ../assets/resume.json
+    return (inPages? '../' : '') + rel;
   }
-  return '/' + rel; // e.g., /assets/resume.json
+  return '/' + rel;
 }
 
-// Local preview bar (Home) ---------------------------------------------
+// (Optional) Local preview bar on Home ---------------------------------
 function initLocalPreviewBar(){
   const bar = document.getElementById('localPreviewBar');
   if(!bar) return;
@@ -52,13 +53,13 @@ function initLocalPreviewBar(){
     if(!f) return;
     const text = await f.text();
     try{
-      JSON.parse(text); // validate
+      JSON.parse(text);
       localStorage.setItem('resumeJSON', text);
       bar.querySelector('.status').textContent = 'Loaded ✓ (stored in this browser)';
     }catch(err){ alert('Invalid JSON: ' + err.message); }
   });
   clearBtn.addEventListener('click', ()=>{ localStorage.removeItem('resumeJSON'); bar.querySelector('.status').textContent='Cleared'; });
-  toResume.addEventListener('click', ()=>{ const href = assetUrl('pages/resume.html'); location.href = href; });
+  toResume.addEventListener('click', ()=>{ location.href = assetUrl('pages/resume.html'); });
 }
 
 // DOM helpers -----------------------------------------------------------
@@ -80,13 +81,12 @@ function renderCustom(id,label,data){ const s=el('section',{id}); s.appendChild(
 const RENDERERS = { summary:renderSummary, experience:renderExperience, skills:renderSkills, education:renderEducation, hobbies:renderHobbies };
 
 // Build right-side nav from JSON order ---------------------------------
-function buildRightNavFromJson(nav, root){
+function buildRightNavFromJson(nav){
   const navRight = document.getElementById('navRight'); if(!navRight) return;
   const themeBtn = navRight.querySelector('#themeToggle');
   navRight.querySelectorAll('a').forEach(a=>a.remove());
   const items = (nav?.sections || []).map(s=> ({ id:s.id, label:s.label||s.id }));
   items.forEach(it=>{
-    // Only add link if the section exists in DOM (rendered below).
     const a = el('a',{class:'nav-link', href:'#'+it.id}, it.label);
     navRight.insertBefore(a, themeBtn||null);
   });
@@ -97,10 +97,10 @@ function renderResume(data){
   const root = document.getElementById('contentRoot'); if(!root) return;
   root.innerHTML='';
 
-  // Build right nav first (from JSON labels); links will point to IDs we render below
-  buildRightNavFromJson(data.nav, root);
+  // 1) Build right nav from JSON labels (shows intended order/labels)
+  buildRightNavFromJson(data.nav);
 
-  // Render sections in JSON-defined order
+  // 2) Render sections in that order
   const order = (data.nav && Array.isArray(data.nav.sections)) ? data.nav.sections : [
     {id:'summary',label:'Summary'},{id:'experience',label:'Experience'},{id:'skills',label:'Skills'},{id:'education',label:'Education'},{id:'hobbies',label:'Hobbies'}
   ];
@@ -110,7 +110,7 @@ function renderResume(data){
     root.appendChild(sec);
   });
 
-  // Contact & links
+  // 3) Contact & links
   const c = data.contact||{}; const email=(c.email||'').trim(); const phone=(c.phone||'').trim(); const digits=phone.replace(/[^\d]/g,'');
   const ln=c.linkedin||'#';
   const resumeFile=c.resumeFile||'/assets/JakobDeGazio - Resume.pdf';
@@ -120,8 +120,10 @@ function renderResume(data){
   });
   const dlD=document.getElementById('dlDesktop'); const dlM=document.getElementById('dlMobile'); if(dlD) dlD.href=resumeURL; if(dlM) dlM.href=resumeURL; const lnD=document.getElementById('lnDesktop'); const lnM=document.getElementById('lnMobile'); if(lnD) lnD.href=ln; if(lnM) lnM.href=ln;
 
-  // Finish UI hooks
+  // 4) Wire UI
   setupReveal(); setupScrollSpy(); enhanceContactBlocks(); wireProfileClicks();
+
+  console.log('[Resume] Rendered successfully. Sections:', order.map(s=>s.id));
 }
 
 // Contact reveal --------------------------------------------------------
@@ -131,7 +133,7 @@ function enhanceContactBlocks(){ document.querySelectorAll('.contact-block').for
 function setupReveal(){ const sections=document.querySelectorAll('main section'); if(!sections.length) return; const io=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); }); },{threshold:0.1}); sections.forEach(s=> io.observe(s)); }
 
 // Scrollspy -------------------------------------------------------------
-function setupScrollSpy(){ const navLinks=Array.from(document.querySelectorAll('.nav-right a')); const sections=Array.from(document.querySelectorAll('main section')); if(!navLinks.length||!sections.length) return; const idFor=a=>(a.getAttribute('href')||'').replace('#',''); const byId=new Map(navLinks.map(a=>[idFor(a),a])); const setActive=id=>{ if(!id) return; navLinks.forEach(l=>l.classList.remove('active')); const link=byId.get(id); if(link) link.classList.add('active'); }; function update(){ const first=sections[0]; if(window.scrollY<=first.offsetTop+5){ setActive(first.id); return; } const bottom=window.innerHeight+window.scrollY; const docH=Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); if(bottom>=docH-2){ setActive(sections[sections.length-1].id); return; } const center=window.scrollY+window.innerHeight/2; let cur=first.id; for(const sec of sections){ const top=sec.offsetTop, bot=top+sec.offsetHeight; if(center>=top && center<bot){ cur=sec.id; break; } } setActive(cur); } window.addEventListener('scroll', update, {passive:true}); window.addEventListener('resize', update); document.addEventListener('DOMContentLoaded', update); update(); navLinks.forEach(link=> link.addEventListener('click', ()=>{ setActive(idFor(link)); setTimeout(update, 900); })); }
+function setupScrollSpy(){ const navLinks=Array.from(document.querySelectorAll('.nav-right a')); const sections=Array.from(document.querySelectorAll('main section')); if(!navLinks.length||!sections.length) return; const idFor=a=>(a.getAttribute('href')||'').replace('#',''); const byId=new Map(navLinks.map(a=>[idFor(a),a])); const setActive=id=>{ if(!id) return; navLinks.forEach(l=>l.classList.remove('active')); const link=byId.get(id); if(link) link.classList.add('active'); }; function update(){ const first=sections[0]; if(window.scrollY<=first.offsetTop+5){ setActive(first.id); return; } const bottom=window.innerHeight+window.scrollY; const docH=Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); if(bottom>=docH-2){ setActive(sections[sections.length-1].id); return; } const center=window.scrollY+window.innerHeight/2; let cur=first.id; for(const sec of sections){ const top=sec.offsetTop, bot=top+sec.offsetHeight; if(center>=top&&center<bot){ cur=sec.id; break; } } setActive(cur); } window.addEventListener('scroll',update,{passive:true}); window.addEventListener('resize',update); document.addEventListener('DOMContentLoaded',update); update(); navLinks.forEach(link=> link.addEventListener('click',()=>{ setActive(idFor(link)); setTimeout(update,900); })); }
 
 // Print ---------------------------------------------------------------
 const printBtn = document.getElementById('printBtn'); if(printBtn) printBtn.addEventListener('click', ()=> window.print());
@@ -143,8 +145,9 @@ const imageModal=document.getElementById('imageModal'); const modalImage=documen
 async function fetchResume(){
   try{
     const local = localStorage.getItem('resumeJSON');
-    if(local){ const data = JSON.parse(local); renderResume(data); return; }
+    if(local){ const data = JSON.parse(local); console.log('[Resume] Using localStorage JSON'); renderResume(data); return; }
     const url = assetUrl('assets/resume.json') + '?v=' + Date.now();
+    console.log('[Resume] Fetching', url);
     const res = await fetch(url,{cache:'no-store'});
     if(!res.ok) throw new Error('HTTP '+res.status);
     const data = await res.json();
@@ -152,7 +155,7 @@ async function fetchResume(){
   }catch(e){
     console.error('Failed to load resume JSON', e);
     const root=document.getElementById('contentRoot');
-    if(root){ root.innerHTML = '<section class="show"><h2>Error</h2><p>Could not load <code>assets/resume.json</code>. Open <strong>Home</strong> locally and upload your JSON, or check that the file exists at that path.</p></section>'; }
+    if(root){ root.innerHTML = '<section class="show"><h2>Error</h2><p>Could not load <code>assets/resume.json</code>. Try <a href="'+assetUrl('local-preview.html')+'">local-preview.html</a> or check that the file exists at that path.</p></section>'; }
   }
 }
 

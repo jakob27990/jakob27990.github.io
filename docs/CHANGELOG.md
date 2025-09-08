@@ -1,10 +1,10 @@
 # Changelog
 
-## v22
-- Mobile: cards full‑width & centered; mobile actions stacked & centered.
-- Resume right‑nav is built dynamically from `nav.sections` in JSON.
-- Local preview workflow: upload JSON on Home (file://) and browse the full site.
-- Improved error state if JSON fails to load.
+## v23
+- Added dedicated `local-preview.html` (and optional bar on Home) for file:// workflows.
+- Fixed JSON-driven nav and ensured robust rendering order & logging.
+- Restored mobile card centering & stacked actions.
+- Kept `contact-toggle` styling; ensured class remains in HTML.
 
-## v21
-- Initial dynamic right‑nav and file-aware asset URLs.
+## v22
+- JSON-driven right nav; mobile fixes; initial local preview bar.

@@ -1,20 +1,12 @@
-# Site Docs (v22)
+# Site Docs (v23)
 
-This folder documents how the site is structured and how to edit it.
+## One place to edit
+- Update **`assets/resume.json`** to change content **and** the right-side navigation labels/order for the Resume page.
+- To add a custom section, append it to `nav.sections` and add optional HTML in `sectionsContent`.
 
-## Quick start
+## Local preview (no server)
+- Open **`local-preview.html`** (or `index.html` with `file://` or `?local=1`) and upload your JSON once. It is stored in your browser and used by the Resume page.
+- Use the buttons to jump to any page. Click **Clear** to remove the local JSON.
 
-1. **Edit one file**: `assets/resume.json`. All content + the right-side Resume navigation labels come from this JSON.
-2. **Deploy** the site to your host (GitHub Pages). The pages are:
-   - `/` – Home
-   - `/pages/resume.html` – Resume (loads JSON + builds right nav from it)
-   - `/pages/film.html` – Film (under construction)
-   - `/pages/printing.html` – 3D Printing (under construction)
-
-3. **Local preview (no server required)**
-   - Simply double‑click `index.html` (file://).
-   - Click the **Local Preview** bar at the top, upload your `resume.json`, then click **Open Resume**.
-   - The JSON is stored in your browser’s localStorage so you can navigate the full site.
-   - Click **Clear** to remove the local JSON.
-
-See `docs/json-schema.md` for the full JSON schema.
+## Deploy
+- Push the whole folder to your host (e.g., GitHub Pages). Ensure the PDF exists at `/assets/JakobDeGazio - Resume.pdf`.
