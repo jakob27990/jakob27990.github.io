@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Local Preview — Jakob DeGazio</title>
-  <link rel="stylesheet" href="style.css?v=12" />
+  <link rel="stylesheet" href="style.css?v=13" />
   <script>window.SKIP_AUTO_LOAD = true;</script>
 </head>
 <body>
@@ -75,7 +75,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=12"></script>
+  <script src="script.js?v=13"></script>
   <script>
     const fileInput = document.getElementById('fileInput');
     const renderBtn = document.getElementById('renderBtn');
@@ -98,13 +98,13 @@
           if (typeof renderResume === 'function') {
             renderResume(data);
             if (typeof buildNavFromSections === 'function') buildNavFromSections();
+            if (typeof enhanceContactBlocks === 'function') enhanceContactBlocks();
+            if (typeof wireProfileClicks === 'function') wireProfileClicks();
             statusEl.textContent = 'Rendered successfully.';
           } else {
             statusEl.textContent = 'renderResume() not found';
           }
-        }catch(err){
-          statusEl.textContent = 'Invalid JSON: ' + err.message;
-        }
+        }catch(err){ statusEl.textContent = 'Invalid JSON: ' + err.message; }
       };
       reader.onerror = ()=>{ statusEl.textContent = 'Could not read file.'; };
       reader.readAsText(fileRef);

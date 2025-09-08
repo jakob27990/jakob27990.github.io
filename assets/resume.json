@@ -51,30 +51,6 @@
     "Motorcycles",
     "Guitar"
   ],
-  "sections": [
-    {
-      "id": "tools",
-      "title": "Tools I Use",
-      "type": "pills",
-      "items": [
-        "VS Code",
-        "Git",
-        "Azure DevOps",
-        "Papercut MF",
-        "AppsAnywhere"
-      ]
-    },
-    {
-      "id": "projects",
-      "title": "Selected Projects",
-      "type": "bullets",
-      "items": [
-        "Automated imaging pipeline with PowerShell and SCCM task sequences.",
-        "Intune Autopilot rollout improving OOBE time by 45%.",
-        "Self-service app delivery with AppsAnywhere and targeted collections."
-      ]
-    }
-  ],
   "contact": {
     "phone": "289-668-4711",
     "email": "jake.degazio@gmail.com",

@@ -1,4 +1,4 @@
-/* Root stylesheet (v12) */
+/* Root stylesheet (v13) */
 :root{--bg:#f7f9fb;--card:rgba(255,255,255,0.97);--text:#111827;--muted:#6b7280;--accent:#0ea5ff;--accent-2:#0066cc;--nav-bg:#ffffffcc;--nav-border:rgba(0,0,0,.06)}
 [data-theme="dark"]{--bg:#0b0f14;--card:rgba(16,18,22,0.9);--text:#e6eef8;--muted:#9aa6b2;--accent:#f59e0b;--accent-2:#d97706;--nav-bg:rgba(10,12,15,0.7);--nav-border:rgba(255,255,255,.06)}
 *,*:before,*:after{box-sizing:border-box}html,body{height:100%;margin:0;padding:0}html{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}body{font-family:Inter,system-ui,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.45;transition:background .35s,color .35s;scroll-behavior:smooth;overflow-x:hidden}
